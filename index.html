@@ -8,9 +8,20 @@
 </head>
 
 <body>
-    <div>
-        <h1>WebView Sample</h1>
-    </div>
+    <h1>Recording Event From Web View</h1>
+        <div id="main">
+            <button id="recordEvent" onclick="recordEvent()">Record Event</button>
+        </div>
+    <script type="text/javascript">
+        function recordEvent() {
+            var eventName = "af_purchase"
+            var eventParams = "{\"af_revenue\":\"6.72\", \"af_content_type\": \"wallets\", \"af_content_id\": \"15854\"}";
+            // HTML code for Android
+            app.recordEvent(eventName, eventParams)
+            // HTML Code for iOS
+            webkit.messageHandlers.event.postMessage(eventName + "+" + eventParams);
+        }
+    </script>
 </body>
 
 </html>
