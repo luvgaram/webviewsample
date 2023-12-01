@@ -14,12 +14,18 @@
         </div>
     <script type="text/javascript">
         function recordEvent() {
-            var eventName = "af_purchase"
+            var eventName = "af_purchase";
             var eventParams = "{\"af_revenue\":\"6.72\", \"af_content_type\": \"wallets\", \"af_content_id\": \"15854\"}";
             // HTML code for Android
-            app.recordEvent(eventName, eventParams)
+            if (typeof app != "undefined") {
+                app.recordEvent(eventName, eventParams);
+                console.log("an Android In-app Event was sent");
+            }
             // HTML Code for iOS
-            webkit.messageHandlers.event.postMessage(eventName + "+" + eventParams);
+            if (typeof webkit != "undefined") {
+                webkit.messageHandlers.event.postMessage(eventName + "+" + eventParams);
+                console.log("an iOS In-app Event was sent");
+            }
         }
     </script>
 </body>
