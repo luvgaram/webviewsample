@@ -10,8 +10,7 @@
 <body>
     <h1>Recording Event From Web View - URL Loading</h1>
         <div id="main">
-          <button id="cartButton">Record "Add to cart" Event</button></br>
-          <button id="purchaseButton">Record "Add to cart" Event</button>
+          <button id="cartButton">Record "Add to cart" Event</button>
         </div>
     <script type="text/javascript">
       function recordEvent(eventName,eventValue) {
@@ -25,11 +24,6 @@
         var eventName = "af_add_to_cart";
         var eventValue = "{\"af_price\":\"9.99\", \"af_content_type\": \"url-loading\", \"af_content_id\": \"54321\", \"af_content\": \"item54321\", \"af_quantity\": \"1\"}";
         recordEvent(eventName, eventValue);
-      }
-      var purchaseButton = document.getElementById("purchaseButton");
-      purchaseButton.onclick = function(event) {
-        var eventName = "af_purchase";
-        var eventValue = "{\"af_revenue\":\"9.99\", \"af_content_type\": \"loading\", \"af_content_id\": \"54321\"}";
       }
     </script>
 </body>
