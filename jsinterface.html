@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WebView Sample</title>
+</head>
+
+<body>
+    <h1>Recording Event From Web View - JavaScript Interface</h1>
+        <div id="main">
+            <button id="recordEvent" onclick="recordEvent()">Record Purchase Event</button>
+        </div>
+    <script type="text/javascript">
+        function recordEvent() {
+            var eventName = "af_purchase";
+            var eventParams = "{\"af_revenue\":\"6.72\", \"af_content_type\": \"JS Interface\", \"af_content_id\": \"12345\"}";
+            // HTML code for Android
+            if (typeof app != "undefined") {
+                app.recordEvent(eventName, eventParams);
+                console.log("an Android In-app Event was sent");
+            }
+            // HTML Code for iOS
+            if (typeof webkit != "undefined") {
+                webkit.messageHandlers.event.postMessage(eventName + "+" + eventParams);
+                console.log("an iOS In-app Event was sent");
+            }
+        }
+    </script>
+</body>
+
+</html>
