@@ -10,8 +10,7 @@
 <body>
     <h1>Record Event From Web View - JavaScript Interface</h1>
         <div>
-            <button id="recordEvent" onclick="recordEvent()">Record Purchase Event</button><br><br>
-            <button onclick="window.history.back()" type="button">Go back</button>
+            <button id="recordEvent" onclick="recordEvent()">Record Purchase Event</button>
         </div>
     <h1>PBA Web SDK Test</h1>
     <form id="webDevKeyForm">
@@ -19,6 +18,8 @@
       <input type="text" id="webDevKey" name="webDevKey"><br>
       <input type="submit" value="Submit">
     </form>
+    <br><br>
+    <button onclick="window.history.back()" type="button">Go back</button>
     
     <script type="text/javascript">
         function recordEvent() {
