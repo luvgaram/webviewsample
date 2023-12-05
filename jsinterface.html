@@ -8,26 +8,49 @@
 </head>
 
 <body>
-    <h1>Recording Event From Web View - JavaScript Interface</h1>
+    <h1>Record Event From Web View - JavaScript Interface</h1>
         <div>
             <button id="recordEvent" onclick="recordEvent()">Record Purchase Event</button><br><br>
             <button onclick="window.history.back()" type="button">Go back</button>
         </div>
+    <h1>PBA Web SDK Test</h1>
+    <form id="webDevKeyForm">
+      <label for="webDevKey">WEB_DEV_KEY:</label><br>
+      <input type="text" id="webDevKey" name="webDevKey"><br>
+      <input type="submit" value="Submit">
+    </form>
+    
     <script type="text/javascript">
         function recordEvent() {
             var eventName = "af_purchase";
             var eventParams = "{\"af_revenue\":\"6.72\", \"af_content_type\": \"JS Interface\", \"af_content_id\": \"12345\"}";
-            // HTML code for Android
-            if (typeof app != "undefined") {
-                app.recordEvent(eventName, eventParams);
-                console.log("an Android In-app Event was sent");
-            }
+            
             // HTML Code for iOS
             if (typeof webkit != "undefined") {
                 webkit.messageHandlers.event.postMessage(eventName + "+" + eventParams);
                 console.log("an iOS In-app Event was sent");
+            } else if (typeof app != "undefined") { 
+                app.recordEvent(eventName, eventParams);
+                console.log("an Android In-app Event was sent");
+            } else {
+                console.log("The event can't be sent outside of an iOS WebView or Android WebView environment.")
             }
         }
+
+        document.getElementById('webDevKeyForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevents form from refreshing page
+            let webDevKey = document.getElementById('webDevKey').value;
+    
+            if (!(/iOS WebView|Android WebView/.test(navigator.userAgent))) {
+                !function(t,e,n,s,a,c,i,o,p){t.AppsFlyerSdkObject=a,t.AF=t.AF||function(){
+                (t.AF.q=t.AF.q||[]).push([Date.now()].concat(Array.prototype.slice.call(arguments)))},
+                t.AF.id=t.AF.id||i,t.AF.plugins={},o=e.createElement(n),p=e.getElementsByTagName(n)[0],o.async=1,
+                o.src="https://websdk.appsflyer.com?"+(c.length>0?"st="+c.split(",").sort().join(",")+"&":"")+(i.length>0?"af_id="+i:""),
+                p.parentNode.insertBefore(o,p)}(window,document,"script",0,"AF","pba",{pba: {webAppId: webDevKey}})
+            } else {
+                console.log("The script can't be executed inside an iOS WebView or Android WebView environment.");
+            }
+        });
     </script>
 </body>
 
