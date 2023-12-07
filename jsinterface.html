@@ -25,13 +25,12 @@
 
         var userEnv = "notDetermined";
 
-        // check user environment
+        // set userEnv
         window.onload = function() {
             userEnv = checkEnvironment();
-        };
+        }
 
         // check user environment
-
         function checkEnvironment() {
             // check webKit injected from iOS SDK 
             if (typeof webkit != "undefined") {
@@ -48,7 +47,7 @@
             var eventParams = "{\"af_revenue\":\"6.72\", \"af_content_type\": \"JS Interface\", \"af_content_id\": \"12345\"}";
             
             // HTML Code for iOS
-            switch userEnv {
+            switch (userEnv) {
                 case 'iOSWebView':
                     webkit.messageHandlers.event.postMessage(eventName + "+" + eventParams);
                     console.log("an iOS In-app Event was sent");
