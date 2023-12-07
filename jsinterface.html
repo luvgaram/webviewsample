@@ -22,19 +22,43 @@
     <button onclick="window.history.back()" type="button">Go back</button>
     
     <script type="text/javascript">
+
+        var userEnv = "notDetermined";
+
+        // check user environment
+        window.onload = function() {
+            userEnv = checkEnvironment();
+        };
+
+        // check user environment
+
+        function checkEnvironment() {
+            // check webKit injected from iOS SDK 
+            if (typeof webkit != "undefined") {
+                return "iOSWebView";
+            } else if (typeof app != "undefined") { // check app injected from Android SDK
+                return "AndroidWebView";
+            } else {
+                return "notWebView"
+            }
+        }
+
         function recordEvent() {
             var eventName = "af_purchase";
             var eventParams = "{\"af_revenue\":\"6.72\", \"af_content_type\": \"JS Interface\", \"af_content_id\": \"12345\"}";
             
             // HTML Code for iOS
-            if (typeof webkit != "undefined") {
-                webkit.messageHandlers.event.postMessage(eventName + "+" + eventParams);
-                console.log("an iOS In-app Event was sent");
-            } else if (typeof app != "undefined") { 
-                app.recordEvent(eventName, eventParams);
-                console.log("an Android In-app Event was sent");
-            } else {
-                console.log("The event can't be sent outside of an iOS WebView or Android WebView environment.")
+            switch userEnv {
+                case 'iOSWebView':
+                    webkit.messageHandlers.event.postMessage(eventName + "+" + eventParams);
+                    console.log("an iOS In-app Event was sent");
+                    break;
+                case 'AndroidWebView':
+                    app.recordEvent(eventName, eventParams);
+                    console.log("an Android In-app Event was sent");
+                    break;
+                default:
+                    console.log("The event can't be sent outside of an iOS WebView or Android WebView environment.")
             }
         }
 

@@ -42,7 +42,7 @@
           if (typeof webkit != "undefined") {
               webkit.messageHandlers.event.postMessage(eventName + "+" + eventParams);
               console.log("an iOS In-app Event was sent");
-          } else if (typeof app != "undefined") { 
+          } else if (typeof app != "undefined") { // HTML Code for Android
               app.recordEvent(eventName, eventParams);
               console.log("an Android In-app Event was sent");
           } else {
