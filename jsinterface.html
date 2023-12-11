@@ -63,8 +63,8 @@
             e.preventDefault(); // Prevents form from refreshing page
             let webDevKey = document.getElementById('webDevKey').value;
     
-    // TODO: change it to userEnv check
-            if (!(/iOS_WebView|Android_WebView/.test(navigator.userAgent))) {
+            // init PBA 
+            if (userEnv != "iOSWebView" && userEnv != "AndroidWebView") {
                 !function(t,e,n,s,a,c,i,o,p){t.AppsFlyerSdkObject=a,t.AF=t.AF||function(){
                 (t.AF.q=t.AF.q||[]).push([Date.now()].concat(Array.prototype.slice.call(arguments)))},
                 t.AF.id=t.AF.id||i,t.AF.plugins={},o=e.createElement(n),p=e.getElementsByTagName(n)[0],o.async=1,
