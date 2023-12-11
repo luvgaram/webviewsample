@@ -18,8 +18,6 @@
       <input type="text" id="webDevKey" name="webDevKey"><br>
       <input type="submit" value="Submit">
     </form>
-    <br><br>
-    <button onclick="window.history.back()" type="button">Go back</button>
     
     <script type="text/javascript">
 
@@ -65,7 +63,8 @@
             e.preventDefault(); // Prevents form from refreshing page
             let webDevKey = document.getElementById('webDevKey').value;
     
-            if (!(/iOS WebView|Android WebView/.test(navigator.userAgent))) {
+    // TODO: change it to userEnv check
+            if (!(/iOS_WebView|Android_WebView/.test(navigator.userAgent))) {
                 !function(t,e,n,s,a,c,i,o,p){t.AppsFlyerSdkObject=a,t.AF=t.AF||function(){
                 (t.AF.q=t.AF.q||[]).push([Date.now()].concat(Array.prototype.slice.call(arguments)))},
                 t.AF.id=t.AF.id||i,t.AF.plugins={},o=e.createElement(n),p=e.getElementsByTagName(n)[0],o.async=1,
