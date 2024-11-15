@@ -9,6 +9,10 @@
 
 <body>
     <img src="appsflyer_logo.png" alt="logo"><br>
+    <h1>Set Customer User ID </h1>
+        <div>
+            <button id="setCUID" onclick="setCUID()">Set CUID</button>
+        </div>
     <h1>Record Event From Web View - JavaScript Interface</h1>
         <div>
             <button id="recordEvent" onclick="recordEvent()">Record Purchase Event</button>
@@ -41,6 +45,24 @@
             }
         }
 
+        function setCUID() {
+            var customerUserId = "testCUID123";
+            
+            // HTML Code for iOS
+            switch (userEnv) {
+                case 'iOSWebView':
+                    webkit.messageHandlers.cuid.postMessage(customerUserId);
+                    console.log("an iOS CUID was sent");
+                    break;
+                case 'AndroidWebView':
+                    app.setCustomerUserId(customerUserId);
+                    console.log("an Android CUID was sent");
+                    break;
+                default:
+                    console.log("The event can't be sent outside of an iOS WebView or Android WebView environment.")
+            }
+        }
+        
         function recordEvent() {
             var eventName = "af_purchase";
             var eventParams = "{\"af_revenue\":\"6.72\", \"af_content_type\": \"JS Interface\", \"af_content_id\": \"12345\"}";
